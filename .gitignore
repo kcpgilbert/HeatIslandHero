@@ -347,3 +347,4 @@ dist-ssr
 *.sln
 *.sw?
 
+server/secrets.json
