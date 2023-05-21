@@ -4,6 +4,8 @@ from pprint import pprint
 import json
 import osmnx as ox
 import openai
+import shapely.wkt
+from shapely.geometry import mapping
 
 from data_loader import DataLoader
 
@@ -83,8 +85,10 @@ def sql_route():
 
     sql_query = query_chat_gpt(full_prompt)
     print(sql_query)
+    result = loader.query(sql_query)
+    result = process_geospatial_data(result)
 
-    return loader.query(sql_query)
+    return result
 
 def query_chat_gpt(prompt, json_output=False):
     payload = [{"role": "user", "content": prompt}]
@@ -95,7 +99,25 @@ def query_chat_gpt(prompt, json_output=False):
                                         )
     
     result = completion.choices[0].message.content
-    if (json_output):
+    if json_output:
         result = json.loads(result)
     return result
 
+def process_geospatial_data(array):
+    new_array = []
+    for item in array:
+        if type(item) == list or type(item) == tuple:
+            new_array.append(process_geospatial_data(item))
+        elif type(item) == str:
+            if item.startswith("POLYGON") or item.startswith("MULTIPOLYGON"):
+                p = shapely.wkt.loads(item)
+                poly_mapped = mapping(p)
+                poly_coordinates = poly_mapped['coordinates'][0]
+                poly_ = [{'lat': coords[1],'lon': coords[0]} for coords in poly_coordinates]
+
+                new_array.append(poly_)
+            else:
+                new_array.append(item)
+        else:
+            new_array.append(item)
+    return new_array
