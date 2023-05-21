@@ -4,7 +4,12 @@
 
 HeatIslandHero is a website that allows users to search for urban heat island impact and sensitivity data accross census tracts in Los Angeles County. This data will be displayed both on a map and in list format to the user. HeatIslandHero also searches the relevant census tracts for buildings that are good candidates for the addition of green roofs in the area and displays these to the users. 
 
-The live version of the website can be found at: https://heat-island-hero.netlify.app/
+## Collaborators
+- Sergey Pigach
+- Evan Koga
+- Kendall Gilbert
+- Sila Gulgec
+- Alloy Kemp
 
 ## System Overview
 ![image](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/c7bac068-b0f9-46e5-a049-4f27b517247e)
