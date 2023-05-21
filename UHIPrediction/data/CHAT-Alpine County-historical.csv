@@ -1,0 +1,6 @@
+geoid_long,census_tract,time_of_year,socioeconomic_group,census_county,census_city,avg_event_rh_max_perc,avg_event_rh_min_perc,tmax,tmin,hist_avg_annual_events,hist_avg_duration
+1400000US06003010000,6003010000,Total,"2006 HW","Alpine County",Markleeville,56.87,21.62,91.73,63.53,0.00,0.00
+1400000US06003010000,6003010000,Total,Vulnerable,"Alpine County",Markleeville,52.26,20.40,86.90,58.63,0.73,3.32
+1400000US06003010000,6003010000,AM,General,"Alpine County",Markleeville,57.56,22.14,78.16,49.62,0.37,4.18
+1400000US06003010000,6003010000,JJA,General,"Alpine County",Markleeville,47.81,18.89,90.68,61.63,0.17,4.80
+1400000US06003010000,6003010000,SO,General,"Alpine County",Markleeville,66.58,28.40,83.20,58.60,0.17,4.00
