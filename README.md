@@ -7,11 +7,7 @@ HeatIslandHero is a website that allows users to search for urban heat island im
 ## Collaborators
 
 This project was created at the AECtech Hackathon 2023 in Los Angeles by the following collaborators. 
-- Sergey Pigach 
-- Evan Koga
-- Kendall Gilbert
-- Sila Gulgec
-- Alloy Kemp
+![image](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/36d63d0d-efc9-4133-8212-3c82ab302d07)
 
 ## System Overview
 ![image](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/c7bac068-b0f9-46e5-a049-4f27b517247e)
