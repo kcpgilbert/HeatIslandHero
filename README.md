@@ -15,6 +15,8 @@ Below is an image showing the initial user interface, and an image showing the i
 ![Screenshot 2023-05-21 at 11 13 35 AM](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/20ef7971-5fb0-434f-bd3c-a88c08fa179e)
 ![Screenshot 2023-05-21 at 11 13 00 AM](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/de84fc7e-8c5d-49a3-85e5-f2f64fe0025a)
 
+The system demo video can be downloaded using the following link: https://drive.google.com/file/d/11aIrgMOXyhkYbTGYW17ciapS4pWGL46F/view
+
 ## System Overview
 ![image](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/c7bac068-b0f9-46e5-a049-4f27b517247e)
 ![image](https://github.com/kcpgilbert/HeatIslandHero/assets/120534381/b2bab462-227e-4786-bea6-1381e0a24ed8)
