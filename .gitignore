@@ -348,3 +348,4 @@ dist-ssr
 *.sw?
 
 server/secrets.json
+server/cache
