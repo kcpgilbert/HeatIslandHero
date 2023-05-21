@@ -2,28 +2,100 @@ from flask import Flask
 from flask import request
 from pprint import pprint
 import json
+import osmnx as ox
+import openai
+
+from data_loader import DataLoader
+
+loader = DataLoader()
 
 app = Flask(__name__)
+gpt_model = "gpt-3.5-turbo"
 
 with open("secrets.json", "r") as f:
     secrets = json.load(f)
+    openai.api_key = secrets["gpt-token"]
+    
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/test', methods=['POST'])
+@app.route('/building-footprints', methods=['POST'])
 def test_route():
     payload = request.get_json()
-    
-    print("Request Body:")
-    pprint(payload)
-    print()
-    print("Secrets:")
-    pprint(secrets)
+
+    prompt = payload["prompt"]
+
+    result = query_chat_gpt(prompt, json_output=payload["isJson"])
 
     return {
-        "request_body" : payload,
-        "secrets" : secrets
+        "result": result
     }
+
+@app.route('/sql', methods=['POST'])
+def sql_route():
+    payload = request.get_json()
+
+    prompt = payload["prompt"]
+
+    gpt_primer = """
+
+    Do not answer the question, instead generate a SQL query to select relevant data from a table called CENSUSHEAT. Here are the fields available to you:
+
+    index INTEGER NOT NULL PRIMARY KEY,
+    census_county TEXT,
+    census_city TEXT,
+    heat_health_action_index FLOAT,
+    perc_children FLOAT,
+    perc_no_hs_diploma FLOAT,
+    perc_elderly FLOAT,
+    perc_outdoor_workers FLOAT,
+    tract_population FLOAT,
+    perc_poverty FLOAT,
+    perc_two_races FLOAT,
+    perc_nonwhite FLOAT,
+    perc_no_vehicle_access FLOAT,
+    perc_linguistic_isolation FLOAT,
+    perc_no_transit_access FLOAT,
+    asthma_prevalence FLOAT,
+    perc_low_birth_weight FLOAT,
+    cardio_disease_prevalence FLOAT,
+    perc_ambulatory_disability FLOAT,
+    perc_cognitive_disability FLOAT,
+    pm25_concentration FLOAT,
+    perc_impervious_surfaces FLOAT,
+    change_in_dev FLOAT,
+    perc_no_tree_canopy FLOAT,
+    uhii_avgdeltat FLOAT,
+    ozone_exceedance FLOAT,
+    CT20 INTEGER NOT NULL,
+    OBJECTID INTEGER NOT NULL.
+    LABEL FLOAT,
+    ShapeSTArea FLOAT,
+    ShapeSTLength FLOAT,
+    geometry TEXT
+
+    Return just the valid SQL query string, do not add any additional text.
+    """
+
+    full_prompt = prompt + gpt_primer
+
+    sql_query = query_chat_gpt(full_prompt)
+    print(sql_query)
+
+    return loader.query(sql_query)
+
+def query_chat_gpt(prompt, json_output=False):
+    payload = [{"role": "user", "content": prompt}]
+    completion = openai.ChatCompletion.create(
+                                            temperature=0,
+                                            model=gpt_model,
+                                            messages=payload
+                                        )
+    
+    result = completion.choices[0].message.content
+    if (json_output):
+        result = json.loads(result)
+    return result
 
