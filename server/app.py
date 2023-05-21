@@ -7,6 +7,11 @@ import openai
 import shapely.wkt
 from shapely.geometry import mapping
 
+from flask_cors import CORS, cross_origin
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 from data_loader import DataLoader
 
 loader = DataLoader()
@@ -19,11 +24,8 @@ with open("secrets.json", "r") as f:
     openai.api_key = secrets["gpt-token"]
     
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
 @app.route('/building-footprints', methods=['POST'])
+@cross_origin()
 def test_route():
     payload = request.get_json()
 
@@ -36,6 +38,7 @@ def test_route():
     }
 
 @app.route('/sql', methods=['POST'])
+@cross_origin()
 def sql_route():
     payload = request.get_json()
 
