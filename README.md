@@ -5,7 +5,9 @@
 HeatIslandHero is a website that allows users to search for urban heat island impact and sensitivity data accross census tracts in Los Angeles County. This data will be displayed both on a map and in list format to the user. HeatIslandHero also searches the relevant census tracts for buildings that are good candidates for the addition of green roofs in the area and displays these to the users. 
 
 ## Collaborators
-- Sergey Pigach
+
+This project was created at the AECtech Hackathon 2023 in Los Angeles by the following collaborators. 
+- Sergey Pigach 
 - Evan Koga
 - Kendall Gilbert
 - Sila Gulgec
