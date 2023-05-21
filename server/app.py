@@ -17,7 +17,7 @@ from data_loader import DataLoader
 loader = DataLoader()
 
 app = Flask(__name__)
-gpt_model = "gpt-3.5-turbo"
+gpt_model = "gpt-4"
 
 with open("secrets.json", "r") as f:
     secrets = json.load(f)
