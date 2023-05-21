@@ -81,15 +81,16 @@ def sql_route():
     ShapeSTLength FLOAT,
     geometry TEXT
 
-    Return just the valid SQL query string, do not add any additional text.
+    Return just the valid SQL query string, do not add any additional text. Select all fields with *.
     """
 
     full_prompt = prompt + gpt_primer
 
     sql_query = query_chat_gpt(full_prompt)
     print(sql_query)
-    result = loader.query(sql_query)
+    result, headers = loader.query(sql_query)
     result = process_geospatial_data(result)
+    result = populate_with_headers(result, headers)
 
     return result
 
@@ -124,3 +125,15 @@ def process_geospatial_data(array):
         else:
             new_array.append(item)
     return new_array
+
+def populate_with_headers(array, headers):
+    output_array = []
+
+    for line in array:
+        obj = {}
+        for value, header in zip(line, headers):
+            obj[header] = value
+
+        output_array.append(obj)
+
+    return output_array

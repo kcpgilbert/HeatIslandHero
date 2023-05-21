@@ -30,5 +30,6 @@ class DataLoader():
     def query(self, q):
         self.connection = sl.connect(self.db_name)
         with self.connection:
-            data = self.connection.execute(q)
-            return data.fetchall()
+            cursor = self.connection.execute(q)
+            headers = list(map(lambda x: x[0], cursor.description))
+            return cursor.fetchall(), headers
