@@ -27,6 +27,7 @@ This project was created at the AECtech Hackathon 2023 in Los Angeles by the fol
 3. To run the backend server `cd server`, then execute `flask run`
 
 ## Data Sources
+Check out our data folder for the downloadable csv, and geojson data, as well as the merged dataset that was used to create the SQL database.
 - UHI, health index and census data for LA county https://cal-heat.org/download
 - Open Streets Map https://www.openstreetmap.org/#map=5/38.007/-95.844
 - UHI Indec raster map https://www.arcgis.com/home/item.html?id=1b6cad6dd5854d2aa3d215a39a4d372d
